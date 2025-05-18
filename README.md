@@ -23,7 +23,7 @@ Perfect for new projects, prototyping, or learning modern Unity patterns.
 ## Getting Started
 
 1. **Clone or fork** this repo
-2. **Open in Unity 2022 or newer**
+2. **Open in Unity 6000+**
 3. **Press Play** – everything works out of the box
 4. **Edit/add features** – the structure is modular and clear
 
