@@ -16,7 +16,7 @@ Perfect for new projects, prototyping, or learning modern Unity patterns.
 
 ## Why Zenject and LitMotion?
 
-- **Zenject** ([https://github.com/modesttree/Zenject](https://github.com/modesttree/Zenject)) is the de facto Unity DI standard, used in many production games.  
+- **Zenject** ([https://github.com/Mathijs-Bakker/Extenject](https://github.com/Mathijs-Bakker/Extenject)) is the de facto Unity DI standard, used in many production games.  
   You can swap it for VContainer or others; dependencies are abstracted.
 - **LitMotionTween** ([https://github.com/AnnulusGames/LitMotion](https://github.com/AnnulusGames/LitMotion)) is chosen for its clean API, small size, active maintenance, and MIT license.
 
@@ -31,7 +31,7 @@ Perfect for new projects, prototyping, or learning modern Unity patterns.
 
 - MIT License – you can use, fork, or even sell your work, just keep license notes and mentions.
 - Major libraries:
-    - Zenject: [https://github.com/modesttree/Zenject](https://github.com/modesttree/Zenject)
+    - Zenject: [https://github.com/Mathijs-Bakker/Extenject](https://github.com/Mathijs-Bakker/Extenject)
     - LitMotion: [https://github.com/AnnulusGames/LitMotion](https://github.com/AnnulusGames/LitMotion)
 
 ---
