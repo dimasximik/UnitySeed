@@ -14,7 +14,6 @@ namespace Presentation.Player
 
         Rigidbody2D     _rb;
         SpriteRenderer  _sr;
-        PlayerPresenter _presenter;
 
         Color     _defaultColor;   
         Coroutine _flashRoutine;   
@@ -22,17 +21,13 @@ namespace Presentation.Player
         public Rigidbody2D Body      => _rb;
         public Transform   GunMuzzle => gunMuzzle;
 
-        [Inject] void Construct(PlayerPresenter presenter) => _presenter = presenter;
 
         void Awake()
         {
             _rb           = GetComponent<Rigidbody2D>();
             _sr           = GetComponent<SpriteRenderer>();
-            _defaultColor = _sr.color;                       
+            _defaultColor = _sr.color;
         }
-
-        void Update() => _presenter.Tick();
-        void FixedUpdate() => _presenter.FixedTick();
 
         public void PlayShootFx() => shootFx.Play();
 

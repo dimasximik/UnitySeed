@@ -1,5 +1,3 @@
-// Assets/_Project/Presentation/GameScene/GameInstaller.cs
-
 using Core.Services;
 using Gameplay.Bullets;
 using Gameplay.Enemy;
@@ -32,6 +30,10 @@ namespace Presentation.Installers
 
             Container.BindInterfacesAndSelfTo<PlayerPresenter>()
                 .AsSingle().NonLazy();
+
+            Container.Bind<IInputService>()
+                .To<InputService>()
+                .AsSingle();
 
             Container.BindMemoryPool<EnemyView, EnemyView.Pool>()
                 .WithInitialSize(16)

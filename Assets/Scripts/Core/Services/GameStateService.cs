@@ -11,7 +11,6 @@ namespace Core.Services
 
         public PlayerModel Player { get; private set; }
 
-        /* ---------- ctor ---------- */
         public GameStateService(SignalBus bus, SaveService save)
         {
             _bus  = bus;
