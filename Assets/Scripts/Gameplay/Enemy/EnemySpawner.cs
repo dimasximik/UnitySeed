@@ -20,7 +20,7 @@ namespace Gameplay.Enemy
         float _timer;
 
         [Inject]
-        public EnemySpawner(EnemyView.Pool pool, IPlayerView player)
+        public EnemySpawner(EnemyView.Pool pool)
         {
             _pool   = pool;
         }

@@ -32,6 +32,7 @@ namespace Presentation.Player
         }
 
         void Update() => _presenter.Tick();
+        void FixedUpdate() => _presenter.FixedTick();
 
         public void PlayShootFx() => shootFx.Play();
 

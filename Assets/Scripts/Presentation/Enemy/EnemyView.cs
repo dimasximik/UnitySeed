@@ -65,6 +65,13 @@ namespace Presentation.Enemy
                 _state.DamagePlayer(contactDmg);
         }
 
-        public class Pool : MonoMemoryPool<EnemyView> { }
+        public class Pool : MonoMemoryPool<EnemyView>
+        {
+            protected override void OnDespawned(EnemyView enemyView)
+            {
+                enemyView.transform.localScale = Vector3.one; 
+            }
+        }
+
     }
 }

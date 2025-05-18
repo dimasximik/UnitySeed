@@ -7,24 +7,27 @@ namespace Gameplay.Bullets
     [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
     public class Bullet : MonoBehaviour
     {
-        [SerializeField] float speed      = 12f;     
-        [SerializeField] float lifeTime   = 2f;      
-        [SerializeField] string enemyTag  = "Enemy"; 
+        [SerializeField] float speed = 12f;
+        [SerializeField] float lifeTime = 2f;
+        [SerializeField] string enemyTag = "Enemy";
 
         Rigidbody2D _rb;
-        Pool        _pool;
-        int         _damage;
-        float       _lifeTimer;
+        Pool _pool;
+        int _damage;
+        float _lifeTimer;
+        bool _isDespawned;
 
-        [Inject] void Construct(Pool pool) => _pool = pool;
+        [Inject]
+        void Construct(Pool pool) => _pool = pool;
 
         void Awake() => _rb = GetComponent<Rigidbody2D>();
 
         public void Init(Vector2 position, Vector2 direction, int damage)
         {
+            _isDespawned = false;
             transform.position = position;
-            _damage            = damage;
-            _lifeTimer         = lifeTime;
+            _damage = damage;
+            _lifeTimer = lifeTime;
             _rb.linearVelocity = direction.normalized * speed;
         }
 
@@ -42,8 +45,15 @@ namespace Gameplay.Bullets
             Despawn();
         }
 
-        void Despawn() => _pool.Despawn(this);
+        void Despawn()
+        {
+            if (_isDespawned) return;
+            _isDespawned = true;
+            _pool.Despawn(this);
+        }
 
-        public class Pool : MonoMemoryPool<Bullet> { }
+        public class Pool : MonoMemoryPool<Bullet>
+        {
+        }
     }
 }

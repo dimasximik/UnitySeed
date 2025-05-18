@@ -66,7 +66,7 @@ namespace Gameplay.Player
             SpeedLevel = DamageLevel = 0;
             Hp = MaxHp;
             Xp = 0;
-            XpToNext = 5;
+            XpToNext = 3;
         }
     }
 }

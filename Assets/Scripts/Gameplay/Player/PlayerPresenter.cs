@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Gameplay.Player
 {
-    public class PlayerPresenter : ITickable, IInitializable, IDisposable
+    public class PlayerPresenter : ITickable, IInitializable, IDisposable, IFixedTickable
     {
         readonly IPlayerView         _view;
         readonly PlayerModel         _model;
@@ -35,11 +35,17 @@ namespace Gameplay.Player
         public void Dispose() =>
             _bus.TryUnsubscribe<PlayerDamagedSignal>(_view.PlayDamageFx);
 
-        public void Tick()
+        
+        public void FixedTick()
         {
             if (_model.IsDead) return;
 
             Move();
+        }
+        public void Tick()
+        {
+            if (_model.IsDead) return;
+
             Shoot();
         }
 
