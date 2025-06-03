@@ -1,39 +1,42 @@
 using System;
-using Core.Services;
 using Core.Signals;
 using Gameplay.Bullets;
 using Presentation.Player;
 using UnityEngine;
 using Zenject;
+using Core.Services;
 
 namespace Gameplay.Player
 {
     public class PlayerPresenter : ITickable, IInitializable, IDisposable, IFixedTickable
     {
-        readonly IPlayerView         _view;
-        readonly PlayerModel         _model;
-        readonly Bullet.Pool         _pool;
-        readonly SignalBus           _bus;
+        readonly IPlayerView   _view;
+        readonly PlayerModel   _model;
+        readonly Bullet.Pool   _pool;
+        readonly SignalBus     _bus;
+        readonly IInputService _input;
 
-        float _fireCd;
+        float _fireCooldown;
 
         [Inject]
         public PlayerPresenter(IPlayerView view,
             GameStateService state,
             Bullet.Pool pool,
-            SignalBus bus)
+            SignalBus bus,
+            IInputService input)
         {
             _view  = view;
             _model = state.Player;
             _pool  = pool;
             _bus   = bus;
+            _input = input;
         }
 
         public void Initialize() =>
             _bus.Subscribe<PlayerDamagedSignal>(_view.PlayDamageFx);
 
         public void Dispose() =>
-            _bus.TryUnsubscribe<PlayerDamagedSignal>(_view.PlayDamageFx);
+            _bus.Unsubscribe<PlayerDamagedSignal>(_view.PlayDamageFx);
 
         
         public void FixedTick()
@@ -51,19 +54,20 @@ namespace Gameplay.Player
 
         void Move()
         {
-            var dir = new Vector2(Input.GetAxis("Horizontal"),
-                Input.GetAxis("Vertical")).normalized;
+            var dir = new Vector2(
+                _input.GetAxis("Horizontal"),
+                _input.GetAxis("Vertical")).normalized;
             _view.Body.linearVelocity = dir * _model.MoveSpeed;
         }
 
         void Shoot()
         {
-            if ((_fireCd -= Time.deltaTime) > 0) return;
-            if (!Input.GetMouseButton(0)) return;
+            if ((_fireCooldown -= Time.deltaTime) > 0) return;
+            if (!_input.GetMouseButton(0)) return;
 
-            _fireCd = .2f;
+            _fireCooldown = .2f;
 
-            Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)
+            Vector2 dir = (Camera.main.ScreenToWorldPoint(_input.MousePosition)
                            - _view.GunMuzzle.position).normalized;
 
             var b = _pool.Spawn();
