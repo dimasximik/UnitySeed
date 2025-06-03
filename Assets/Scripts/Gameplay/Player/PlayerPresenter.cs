@@ -20,7 +20,7 @@ namespace Gameplay.Player
 
         [Inject]
         public PlayerPresenter(IPlayerView view,
-            GameStateService state,
+            IGameStateService state,
             Bullet.Pool pool,
             SignalBus bus,
             IInputService input)

@@ -4,14 +4,14 @@ using Zenject;
 
 namespace Core.Services
 {
-    public class GameStateService
+    public class GameStateService : IGameStateService
     {
         readonly SignalBus   _bus;
-        readonly SaveService _save;
+        readonly ISaveService<SaveData> _save;
 
         public PlayerModel Player { get; private set; }
 
-        public GameStateService(SignalBus bus, SaveService save)
+        public GameStateService(SignalBus bus, ISaveService<SaveData> save)
         {
             _bus  = bus;
             _save = save;
@@ -23,15 +23,6 @@ namespace Core.Services
                 Player.FromSave(data);
         }
 
-        public void AddXp(int amount)
-        {
-            int before = Player.Level;
-            Player.GainXp(amount);
-            SaveGame();
-
-            if (Player.Level > before)
-                _bus.Fire<LevelUpSignal>();
-        }
 
         public void DamagePlayer(int dmg)
         {

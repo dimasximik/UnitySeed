@@ -1,1 +1,6 @@
-namespace Core.Signals { public struct PlayerDiedSignal { } }
+namespace Core.Signals
+{
+    public struct PlayerDiedSignal
+    {
+    }
+}

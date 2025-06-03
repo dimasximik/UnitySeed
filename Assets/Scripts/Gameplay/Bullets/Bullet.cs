@@ -41,7 +41,10 @@ namespace Gameplay.Bullets
         {
             if (!col.CompareTag(enemyTag)) return;
 
-            col.GetComponent<EnemyView>().TakeDamage(_damage);
+            var enemy = col.GetComponent<IEnemyView>();
+            if (enemy != null)
+                enemy.TakeDamage(_damage);
+
             Despawn();
         }
 

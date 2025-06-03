@@ -2,19 +2,14 @@ using UnityEngine;
 
 namespace Core.Services
 {
-    [System.Serializable]
-    public class SaveData
+    public interface ISaveService<T>
     {
-        public int level;
-        public int xp;
-        public int xpToNext;
-
-        public int hp;
-        public int speedLevel;
-        public int damageLevel;
+        void Save(T data);
+        T Load();
+        void Clear();
     }
 
-    public class SaveService
+    public class SaveService : ISaveService<SaveData>
     {
         const string KEY = "DEMO_SAVE";
 
@@ -26,7 +21,8 @@ namespace Core.Services
 
         public SaveData Load()
         {
-            if (!PlayerPrefs.HasKey(KEY)) return null;
+            if (!PlayerPrefs.HasKey(KEY))
+                return null;
             return JsonUtility.FromJson<SaveData>(PlayerPrefs.GetString(KEY));
         }
 

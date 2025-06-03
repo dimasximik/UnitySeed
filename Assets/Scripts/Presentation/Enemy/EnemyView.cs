@@ -7,7 +7,7 @@ using Zenject;
 namespace Presentation.Enemy
 {
     [RequireComponent(typeof(Collider2D))]
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : MonoBehaviour, IEnemyView
     {
         [Header("Stats")]
         [SerializeField] int   hp          = 3;
@@ -17,8 +17,9 @@ namespace Presentation.Enemy
         [Header("FX")]
         [SerializeField] ParticleSystem hitFx;
 
-        [Inject] IPlayerView  _player;
-        [Inject] GameStateService _state;
+        [Inject] IPlayerView          _player;
+        [Inject] IGameStateService    _state;
+        [Inject] IPlayerProgressService _progress;
 
         MotionHandle _punch;
 
@@ -44,7 +45,7 @@ namespace Presentation.Enemy
 
         void Die()
         {
-            _state.AddXp(1);     
+            _progress.AddXp(1);
             _punch.TryCancel();
             Destroy(gameObject);
         }

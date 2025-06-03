@@ -13,10 +13,10 @@ namespace Presentation.UI.Windows
         [SerializeField] Button   dmgBtn;
         [SerializeField] TMP_Text title;
 
-        GameStateService _state;
+        IGameStateService _state;
 
         [Inject]
-        void Construct(GameStateService state) => _state = state;
+        void Construct(IGameStateService state) => _state = state;
 
         void Awake()
         {

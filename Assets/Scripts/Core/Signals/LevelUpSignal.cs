@@ -1,4 +1,6 @@
 namespace Core.Signals
 {
-    public struct LevelUpSignal { }
+    public struct LevelUpSignal
+    {
+    }
 }

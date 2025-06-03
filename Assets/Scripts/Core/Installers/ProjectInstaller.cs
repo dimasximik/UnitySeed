@@ -14,8 +14,9 @@ namespace Core.Installers
             Container.DeclareSignal<PlayerDamagedSignal>();
             Container.DeclareSignal<PlayerDiedSignal>();
 
-            Container.Bind<GameStateService>().AsSingle();
-            Container.Bind<SaveService>().AsSingle();
+            Container.BindInterfacesTo<SaveService>().AsSingle();
+            Container.BindInterfacesTo<GameStateService>().AsSingle();
+            Container.BindInterfacesTo<PlayerProgressService>().AsSingle();
 
         }
     }

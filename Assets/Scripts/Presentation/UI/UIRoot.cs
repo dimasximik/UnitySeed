@@ -10,13 +10,13 @@ namespace Presentation.UI
     {
         readonly LevelUpWindow.Factory _lvlFactory;
         readonly SignalBus             _bus;
-        readonly GameStateService      _state;
+        readonly IGameStateService     _state;
 
         LevelUpWindow _lvlWin;
 
         public UIRoot(LevelUpWindow.Factory lvlFactory,
             SignalBus bus,
-            GameStateService state)
+            IGameStateService state)
         {
             _lvlFactory = lvlFactory;
             _bus        = bus;
