@@ -23,8 +23,8 @@ namespace Presentation.Installers
                 .AsSingle();
 
             Container.Bind<PlayerModel>()
-                .FromMethod(_ => 
-                    Container.Resolve<GameStateService>()
+                .FromMethod(_ =>
+                    Container.Resolve<IGameStateService>()
                         .Player)
                 .AsSingle();
 
